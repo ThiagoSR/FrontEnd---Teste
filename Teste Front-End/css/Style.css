@@ -43,3 +43,22 @@ body{
     border:1px solid #ccc;
     border-radius: 4px;
 }
+#selecionaFotosJ{
+    padding: 8px 23.5px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    color: #555;
+    text-align: center;
+    background-color: #ffffff;
+    border:1px solid #ccc;
+    border-radius: 4px;
+}
+#camposDeCadastroJ{
+	font-size: 16px;
+	font-family: Verdana;
+	color: black;
+	border:2px solid #555;
+	border-radius: 5px;
+	width: 80%;
+}

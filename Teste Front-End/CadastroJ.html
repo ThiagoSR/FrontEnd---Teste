@@ -9,31 +9,34 @@
     
     function limpa_formulário_cep() {
             //Limpa valores do formulário de cep.
-            document.getElementById('ruaF').value=("");
-            document.getElementById('bairroF').value=("");
-            document.getElementById('cidadeF').value=("");
-            document.getElementById('estadoF').value=("");
+            alert("a");
+            document.getElementById('ruaJ').value=("");
+            document.getElementById('bairroJ').value=("");
+            document.getElementById('cidadeJ').value=("");
+            document.getElementById('estadoJ').value=("");
+            alert("a");
     }
 
     function meu_callback(conteudo) {
         if (!("erro" in conteudo)) {
             //Atualiza os campos com os valores.
-            document.getElementById('ruaF').value=(conteudo.logradouro);
-            document.getElementById('bairroF').value=(conteudo.bairro);
+            alert("b");
+            document.getElementById('ruaJ').value=(conteudo.logradouro);
+            document.getElementById('bairroJ').value=(conteudo.bairro);
             addOption(conteudo.localidade);
-            document.getElementById('cidadeF').value=(conteudo.localidade);   
+            document.getElementById('cidadeJ').value=(conteudo.localidade);   
             if((conteudo.uf=="SC")||(conteudo.uf=='SP')||(conteudo.uf=='MG')){
-              document.getElementById('estadoF').value=(conteudo.uf);
+              document.getElementById('estadoJ').value=(conteudo.uf);
             }else{
               addOption2(conteudo.uf);
-              document.getElementById('estadoF').value=(conteudo.uf);   
+              document.getElementById('estadoJ').value=(conteudo.uf);   
             }  
         } //end if.
         else {
             //CEP não Encontrado.
             limpa_formulário_cep();
             alert("CEP não encontrado.");
-            document.getElementById('cepF').value=("");
+            document.getElementById('cepJ').value=("");
         }
     }
         
@@ -52,17 +55,18 @@
             if(validacep.test(cep)) {
 
                 //Preenche os campos com "..." enquanto consulta webservice.
-                document.getElementById('ruaF').value="...";
-                document.getElementById('bairroF').value="...";
-                document.getElementById('cidadeF').value="...";
-                document.getElementById('estadoF').value="...";
+                alert("d");
+                document.getElementById('ruaJ').value="...";
+                document.getElementById('bairroJ').value="...";
+                document.getElementById('cidadeJ').value="...";
+                document.getElementById('estadoJ').value="...";
 
                 //Cria um elemento javascript.
                 var script = document.createElement('script');
 
                 //Sincroniza com o callback.
                 script.src = '//viacep.com.br/ws/'+ cep + '/json/?callback=meu_callback';
-
+alert("c");
                 //Insere script no documento e carrega o conteúdo.
                 document.body.appendChild(script);
 
@@ -71,7 +75,7 @@
                 //cep é inválido.
                 limpa_formulário_cep();
                 alert("Formato de CEP inválido.");
-                document.getElementById('cepF').value=("");
+                document.getElementById('cepJ').value=("");
 
             }
         } //end if.
@@ -104,8 +108,8 @@
     <center>
     <h4 style="padding-top: 15px">Cadastro de Pessoa Jurídica</h4>
     <hr>
-    <form name="cadastroFisica" action="#">
-    <div id="camposDeCadastroF">
+    <form name="cadastroJuridica" action="#">
+    <div id="camposDeCadastroJ">
       <div id="delimita">
         <div class="row">
           <div class="form-group col-md-6">
@@ -121,7 +125,7 @@
             <input type="number" class="form-control" id="cnpjJ" name="cnpjJ" required>
           </div>
           <div class="form-group col-md-6">
-            <label for="dataDeCadastroF">Data de Cadastro:</label>
+            <label for="dataDeCadastroJ">Data de Cadastro:</label>
             <script type="text/javascript">
               function dataAtual(){
                 var data     = new Date();
@@ -129,18 +133,18 @@
                 var mes      = data.getMonth();        
                 var ano4     = data.getFullYear();      
                 var str_data = dia + '/' + (mes+1) + '/' + ano4;
-                document.getElementById('dataDeCadastroF').value=str_data;
+                document.getElementById('dataDeCadastroJ').value=str_data;
               }
             </script>
-            <input type="text" class="form-control" id="dataDeCadastroF" readonly name="dataDeCadastroF" required>
+            <input type="text" class="form-control" id="dataDeCadastroJ" readonly name="dataDeCadastroJ" required>
           </div>
           <div class="form-group col-md-6">
-            <label for="cepF">CEP:</label>
-            <input type="number" class="form-control" id="cepF" name="cepF" required onblur="pesquisacep(this.value);">
+            <label for="cepJ">CEP:</label>
+            <input type="number" class="form-control" id="cepJ" name="cepJ" required onblur="pesquisacep(this.value);">
           </div>
           <div class="form-group col-md-6">
-            <label for="estadoF">Estado:</label>
-            <select class="form-control" id="estadoF" name="estadoF" required onchange="alteraCidade(this.value);">
+            <label for="estadoJ">Estado:</label>
+            <select class="form-control" id="estadoJ" name="estadoJ" required onchange="alteraCidade(this.value);">
               <option value="1">Selecione um Estado</option>
               <option value="SC">SC</option>
               <option value="SP">SP</option>
@@ -148,7 +152,7 @@
             </select>
             <script type="text/javascript">
               function alteraCidade(estado){
-                $("#cidadeF").html(''); 
+                $("#cidadeJ").html(''); 
               switch(estado) {
                     case "SC":
                       var cidades= [
@@ -178,48 +182,48 @@
               }  
                 function addOption(valor) {
                   var option = new Option(valor, valor);
-                  var select = document.getElementById("cidadeF");
+                  var select = document.getElementById("cidadeJ");
                   select.add(option);
                 }
                 function addOption2(valor) {
                   var option = new Option(valor, valor);
-                  var select = document.getElementById("estadoF");
+                  var select = document.getElementById("estadoJ");
                   select.add(option);
                 }
             </script>
           </div>
           <div class="form-group col-md-6">
-            <label for="cidadeF">Cidade:</label>
-            <select class="form-control" id="cidadeF" name="cidadeF" required>
+            <label for="cidadeJ">Cidade:</label>
+            <select class="form-control" id="cidadeJ" name="cidadeJ" required>
               <option value="">Selecione o Estado primeiro</option>
             </select>
           </div>
           <div class="form-group col-md-6">
-            <label for="bairroF">Bairro:</label>
-            <input type="text" class="form-control" id="bairroF" name="bairroF" required>
+            <label for="bairroJ">Bairro:</label>
+            <input type="text" class="form-control" id="bairroJ" name="bairroJ" required>
           </div>
           <div class="form-group col-md-6">
-            <label for="ruaF">Rua:</label>
-            <input type="text" class="form-control" id="ruaF" name="ruaF" required>
+            <label for="ruaJ">Rua:</label>
+            <input type="text" class="form-control" id="ruaJ" name="ruaJ" required>
           </div> 
           <div class="form-group col-md-6">
-            <label for="radio1F">Dependentes:</label><br>
+            <label for="radio1J">Dependentes:</label><br>
             <div id="bordaRadio">
-              <label class="radio-inline"><input type="radio" name="radioDependenteF" id="radio" required>Nenhum</label>
-              <label class="radio-inline"><input type="radio" name="radioDependenteF" id="radio" required>Um</label>
-              <label class="radio-inline"><input type="radio" name="radioDependenteF" id="radio" required>Dois</label>
-              <label class="radio-inline"><input type="radio" name="radioDependenteF" id="radio" required>Mais que Dois</label>
+              <label class="radio-inline"><input type="radio" name="radioDependenteJ" id="radio" required>Nenhum</label>
+              <label class="radio-inline"><input type="radio" name="radioDependenteJ" id="radio" required>Um</label>
+              <label class="radio-inline"><input type="radio" name="radioDependenteJ" id="radio" required>Dois</label>
+              <label class="radio-inline"><input type="radio" name="radioDependenteJ" id="radio" required>Mais que Dois</label>
             </div>  
           </div>
         </div>
-        <input type="file" name="imagemMutiplaF" id="imagemMutiplaF" multiple onchange="alteraLabel();" style="display: none;" accept="image/x-png,image/gif,image/jpeg" required>
-        <label onclick="buscaFotos();" id="selecionaFotosF">Selecione suas fotos</label><br><br>
+        <input type="file" name="imagemMutiplaJ" id="imagemMutiplaJ" multiple onchange="alteraLabel();" style="display: none;" accept="image/x-png,image/gif,image/jpeg" required>
+        <label onclick="buscaFotos();" id="selecionaFotosJ">Selecione suas fotos</label><br><br>
         <script type="text/javascript">
           function alteraLabel(){
-            document.getElementById('selecionaFotosF').innerHTML = document.getElementById('imagemMutiplaF').files.length + " Foto(s) selecionada(s).";
+            document.getElementById('selecionaFotosJ').innerHTML = document.getElementById('imagemMutiplaJ').files.length + " Foto(s) selecionada(s).";
           }
           function buscaFotos(){
-            $("#imagemMutiplaF").click();
+            $("#imagemMutiplaJ").click();
           }
         </script> 
         <input class="btn btn-secondary" id="Cadastrar" type="submit" value="Cadastrar"><br> <br>                              
